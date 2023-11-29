@@ -1,0 +1,54 @@
+﻿@model ML.Disco
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Discos</h2>
+<hr />
+<div>
+    <a class="btn btn-success" href="@Url.Action("Form","Disco")">Agregar</a>
+</div>
+<hr />
+<div class="container">
+    @if (Model.Discos != null)
+    {
+        if (Model.Discos.Count > 0)
+        {
+            <table class="table table-dark table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Editar</th>
+                        <th>Nombre</th>
+                        <th>Artista</th>
+                        <th>Estreno</th>
+                        <th>Costo</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Disco disco in Model.Discos)
+                    {
+                        <tr>
+                            <td><a class="btn btn-warning" href="@Url.Action("Form", "Disco", new {idDisco = disco.IdDisco})"></a></td>
+                            <td>@disco.Nombre</td>
+                            <td>@disco.Artista</td>
+                            <td>@disco.FechaEstreno.ToShortDateString()</td>
+                            <td>$ @disco.Costo</td>
+                            <td><a class="btn btn-danger" href="@Url.Action("Delete", "Disco", new {idDisco = disco.IdDisco})"></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div role="alert" class="alert alert-warning">
+                No tienes discos registrados.
+            </div>
+        }
+
+    }
+
+</div>
+

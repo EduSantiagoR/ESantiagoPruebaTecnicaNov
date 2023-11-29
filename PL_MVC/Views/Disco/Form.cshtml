@@ -1,0 +1,38 @@
+﻿@model ML.Disco
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Formulario</h2>
+<hr />
+<div class="container">
+    @using (Html.BeginForm("Form", "Disco", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.IdDisco)
+        <div class="row mb-3">
+            <div class="col col-4">
+                <label>Nombre</label>
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+            </div>
+            <div class="col col-4">
+                <label>Artista</label>
+                @Html.TextBoxFor(model => model.Artista, new { @class = "form-control", @placeholder = "Artista" })
+            </div>
+            <div class="col col-4">
+                <label>Fecha de estreno</label>
+                @Html.TextBoxFor(model => model.FechaEstreno, new { @class = "form-control", @placeholder = "mm-dd-aaaa" })
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col col-4">
+                <label>Costo</label>
+                @Html.TextBoxFor(model => model.Costo, new { @class = "form-control", @placeholder = "Costo" })
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-danger" href="@Url.Action("GetAll","Disco")">Volver</a>
+            <button class="btn btn-success" type="submit">Guardar</button>
+        </div>
+    }
+</div>
